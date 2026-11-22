@@ -1,0 +1,3 @@
+[submodule "scratch/tab_vision"]
+	path = scratch/tab_vision
+	url = https://github.com/pgil256/tab_vision
