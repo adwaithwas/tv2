@@ -1,79 +1,55 @@
+
 # ==============================================================================
 # GuitarTab AI — Production .gitignore
 # ==============================================================================
 
-# ------------------------------------------------------------------------------
-# 1. Python & Environments
-# ------------------------------------------------------------------------------
+# Python
 __pycache__/
 *.py[cod]
 *$py.class
 *.so
 .Python
-build/
-develop-eggs/
-dist/
-downloads/
-eggs/
-.eggs/
-lib/
-lib64/
-parts/
-sdist/
-var/
-wheels/
 *.egg-info/
 .installed.cfg
 *.egg
 
-# Virtual environments (local to each machine and OS)
+# Python build artifacts
+/backend/build/
+/backend/dist/
+backend/wheels/
+
+# Virtual environments
 .venv/
 venv/
 ENV/
 env/
-backend/.venv/
-scratch/tab_vision/tabvision/.venv/
-scratch/tab_vision/.venv/
 
-# Testing & Coverage
-.cache
+# Testing and coverage
+.cache/
 .pytest_cache/
-backend/.pytest_cache/
+.mypy_cache/
+.ruff_cache/
 .coverage
 .coverage.*
 htmlcov/
 *.cover
 
-# ------------------------------------------------------------------------------
-# 2. Node & Frontends
-# ------------------------------------------------------------------------------
+# Node dependencies
 node_modules/
-frontend/node_modules/
-guitartab-lovable/node_modules/
 
-# Frontend Build Outputs
-frontend/dist/
-guitartab-lovable/dist/
-guitartab-lovable/.output/
-guitartab-lovable/.wrangler/
+# Frontend generated builds
+/frontend/dist/
+/guitartab-lovable/dist/
+/guitartab-lovable/.output/
+/guitartab-lovable/.wrangler/
 
-# ------------------------------------------------------------------------------
-# 3. Environment & Local Secrets
-# ------------------------------------------------------------------------------
+# Environment files and secrets
 .env
-.env*.local
-backend/.env
-frontend/.env
-guitartab-lovable/.env.local
-guitartab-lovable/.env*.local
+.env.*
 !.env.example
-!backend/.env.example
-!frontend/.env.example
+!.env.*.example
 
-# ------------------------------------------------------------------------------
-# 4. Data, Uploads & Processed Job Artifacts
-# ------------------------------------------------------------------------------
-# Uploaded video files and processing results
+# Data: uploads and generated processing
 data/uploads/*
 !data/uploads/.gitkeep
 
@@ -83,45 +59,56 @@ data/processed/*
 data/annotations/*
 !data/annotations/.gitkeep
 
-# Large training dataset zip (4.3 GB archive)
-data/raw/guitar-transcription-dataset.zip
+# Large training datasets
+data/raw/*
+!data/raw/.gitkeep
+
+data/extracted_fretboard/
 
 # Evaluation artifacts
-data/processed/evaluation/
 scratch/vision_eval/
 runs/
 
-# ------------------------------------------------------------------------------
-# 5. Model Checkpoints & Weights
-# ------------------------------------------------------------------------------
-# Ignore generic weight formats by default
+# Model weights
 *.pth
 *.onnx
-
-# Allow the required runtime model checkpoint
 *.pt
+
+# Required runtime checkpoint
+!backend/models/
 !backend/models/fretboard_rcnn.pt
 
-# ------------------------------------------------------------------------------
-# 6. TabVision & Scratch Areas
-# ------------------------------------------------------------------------------
-# NOTE: Do NOT ignore scratch/tab_vision/ (submodule source)
+# TabVision source is a required Git submodule.
+# Never ignore scratch/tab_vision/
+
+# Temporary scratch outputs
 scratch/*.tab
 scratch/*.log
 scratch/*.mp4
 scratch/*.wav
 
-# ------------------------------------------------------------------------------
-# 7. OS & Editor Files
-# ------------------------------------------------------------------------------
+# Media files
+*.mp4
+*.wav
+*.mp3
+
+# OS files
 .DS_Store
 Thumbs.db
 Desktop.ini
+
+# IDE files
 .idea/
 .vscode/
+
+# Editor temporary files
 *.swp
 *.swo
 *~
+
+# Logs
 *.log
-old__.gitignore
+
+# Local helper files
 cmd.txt
+old__.gitignore
